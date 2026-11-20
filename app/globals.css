@@ -1,26 +1,152 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --font-heading: "Syne", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-mono: "Space Grotesk", monospace, sans-serif;
+    --font-body: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+
+  body {
+    background-color: #0c0806;
+    color: #f5f5f5;
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-heading {
+    font-family: var(--font-heading);
+  }
+
+  .font-mono-tech {
+    font-family: var(--font-mono);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Custom laser beam / streak effects for hero corners */
+.laser-beam-tl {
+  position: absolute;
+  top: -150px;
+  left: -150px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 98, 36, 0.22) 0%, rgba(235, 64, 11, 0.08) 40%, transparent 70%);
+  pointer-events: none;
+  filter: blur(40px);
+}
+
+.laser-beam-br {
+  position: absolute;
+  bottom: -150px;
+  right: -150px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 98, 36, 0.18) 0%, rgba(224, 59, 7, 0.06) 50%, transparent 70%);
+  pointer-events: none;
+  filter: blur(50px);
+}
+
+.laser-line-1 {
+  position: absolute;
+  top: 15%;
+  left: -20%;
+  width: 140%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 110, 50, 0.25), rgba(255, 170, 70, 0.6), rgba(255, 110, 50, 0.25), transparent);
+  transform: rotate(-16deg);
+  pointer-events: none;
+}
+
+.laser-line-2 {
+  position: absolute;
+  bottom: 25%;
+  left: -20%;
+  width: 140%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 90, 30, 0.15), rgba(255, 130, 60, 0.4), rgba(255, 90, 30, 0.15), transparent);
+  transform: rotate(-18deg);
+  pointer-events: none;
+}
+
+/* Subtle crosshair indicator */
+.crosshair-indicator {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Floating animation */
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(0.8deg);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(7px) rotate(-0.8deg);
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+.animate-float-subtle {
+  animation: float-subtle 6s ease-in-out infinite;
+}
+
+.animate-float-reverse {
+  animation: float-reverse 7s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 16s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0c0806;
+}
+::-webkit-scrollbar-thumb {
+  background: #ff521a;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff7340;
 }
